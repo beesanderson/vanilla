@@ -30,11 +30,15 @@ function showSuccess(input) {
 }
 
 // Check Email Validity
-function isValidEmail(email) {
+function checkEmail(input) {
     // With regular expression
     // Just search "js email regex" for validation
     const re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-    return re.test(String(email).toLowerCase());
+    if(re.test(input.value.trim())) {
+        showSuccess(input)
+    } else {
+        showError(input, 'Email is not valid.')
+    }
 }
 
 // Check Required Fields
@@ -51,6 +55,29 @@ function checkRequired(inputArr) {
         }
     });
 }
+
+// Check input length
+function checkLength(input, min, max) {
+    // length can be used on arrays and strings 
+    if(input.value.length < min) {
+        showError(input, `${getFieldName(input)} must be at least ${min} characters.`);
+    } else if(input.value.length > max) {
+        showError(input, `${getFieldName(input)} must be less than ${max} characters long.`);
+    } else {
+        showSuccess(input);
+    }
+}
+
+
+// Check Passwords Match
+function checkPasswordsMatch(input1, input2) {
+    if(input1.value !== input2.value) {
+        showError(input2, 'Passwords do not match.')
+    } else {
+        showSuccess(input);
+    }
+}
+
 
 // Get Field Name (to capitalize first letter of small text for errorMessage)
 function getFieldName(input) {
@@ -69,5 +96,9 @@ form.addEventListener('submit', function(e) {
     // Higher Order Array Function =>
         // Instead of passing through each field (ie username, password, email, etc) we can pass through an array of objects
     checkRequired([username, email, password, password2]);
-
+    // checkLength(var, min, max)
+    checkLength(username, 3, 15);
+    checkLength(password, 6, 25);
+    checkEmail(email);
+    checkPasswordsMatch(password, password2)
 })
