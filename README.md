@@ -1,8 +1,10 @@
 # Before and After Refactor:
 
-Just an example of form validation in vanilla JS refactoring before and after.
+Just an example of form validation in vanilla JS refactoring before and after. Some disorganized notes taken after recovering from covid related hospitalization.
 
-## If Statements (not clean nor scalable)
+## Form Validator Module
+
+### If Statements (not clean nor scalable)
 
 ```JS
 // will do if statements first. Simple easy way
@@ -83,6 +85,10 @@ form.addEventListener('submit', function(e) {
 })
 ```
 
-## Refactored with 'High Order Array' Method.
+### Refactored with 'High Order Array' Method.
 
-Instructor has separate video lesson that explains each high order array method (there are reportedly five.) I've used `forEach()` the most personally. The first time was while making my [JavaScript SnakeGame]()
+Instructor has separate video lesson that explains each high order array method (there are reportedly five.) I've used `forEach()` the most personally. The first time was while making my [JavaScript SnakeGame]().
+
+##### New Methods Used:
+
+- `charAt()` used to access first letter of input field and change to uppercase.

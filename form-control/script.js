@@ -45,11 +45,17 @@ function checkRequired(inputArr) {
         if(input.value.trim() === '') {
             // To display what is required access name through html id
             console.log(input.id) // to see 
-            showError(input, `${input.id} is required`)
+            showError(input, `${getFieldName(input)} is required`)
         } else {
             showSuccess(input)
         }
     });
+}
+
+// Get Field Name (to capitalize first letter of small text for errorMessage)
+function getFieldName(input) {
+    // use character at method to change the first letter (zero based indexing duh) to capitalized letter then concatenate the rest of the input minus first letter by accessing the input content by way of id then using the .slice() method and selecting which character (zero based indexing again duh) we'd like to pick up from.
+    return input.id.charAt(0).toUpperCase() + input.id.slice(1);
 }
 
 
@@ -60,7 +66,8 @@ function checkRequired(inputArr) {
 form.addEventListener('submit', function(e) {
     e.preventDefault();
 
-    // Instead of passing through each field (ie username, password, email, etc) we can pass through an array of objects
+    // Higher Order Array Function =>
+        // Instead of passing through each field (ie username, password, email, etc) we can pass through an array of objects
     checkRequired([username, email, password, password2]);
 
 })
