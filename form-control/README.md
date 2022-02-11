@@ -1,3 +1,10 @@
+# Before and After Refactor:
+
+Just an example of form validation in vanilla JS refactoring before and after.
+
+## If Statements (not clean nor scalable)
+
+```JS
 // will do if statements first. Simple easy way
 
 const form = document.getElementById('form');
@@ -17,7 +24,7 @@ function showError(input, message) {
     formControl.className = 'form-control error';
     // create variable for small text
     const small = formControl.querySelector('small');
-    // display error message from submit event listener as small variable 
+    // display error message from submit event listener as small variable
     small.innerText = message;
 }
 
@@ -37,21 +44,6 @@ function isValidEmail(email) {
     return re.test(String(email).toLowerCase());
 }
 
-// Check Required Fields
-function checkRequired(inputArr) {
-    //have to loop through each item in array. will do by using higher order array method
-    inputArr.forEach(function(input) {
-        // creating input as index variable for each array item
-        if(input.value.trim() === '') {
-            // To display what is required access name through html id
-            console.log(input.id) // to see 
-            showError(input, `${input.id} is required`)
-        } else {
-            showSuccess(input)
-        }
-    });
-}
-
 
 
 
@@ -60,7 +52,37 @@ function checkRequired(inputArr) {
 form.addEventListener('submit', function(e) {
     e.preventDefault();
 
-    // Instead of passing through each field (ie username, password, email, etc) we can pass through an array of objects
-    checkRequired([username, email, password, password2]);
+    if(username.value === '') {
+        showError(username, 'Username is Required')
+    } else {
+        showSuccess(username)
+    }
+
+    if(email.value === '') {
+        showError(email, 'Email is Required')
+    } else if(!isValidEmail(email.value)) {
+        showError(email, 'Email is not Valid')
+    } else {
+
+        showSuccess(email)
+    }
+
+    if(password.value === '') {
+        showError(password, 'Password is Required')
+    } else {
+        showSuccess(password)
+    }
+
+    if(password2.value === '') {
+        showError(password2, 'Reenter Password is Required')
+    } else {
+        showSuccess(password2)
+    }
+
 
 })
+```
+
+## Refactored with 'High Order Array' Method.
+
+Instructor has separate video lesson that explains each high order array method (there are reportedly five.) I've used `forEach()` the most personally. The first time was while making my [JavaScript SnakeGame]()
