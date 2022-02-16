@@ -217,7 +217,7 @@ form.addEventListener('submit', function(e) {
 
 ##### New Methods Used:
 
-- ``
+`.forEach()` `.Map()`
 
 ##### Used Methods
 
@@ -226,3 +226,13 @@ form.addEventListener('submit', function(e) {
   1. forEach()
   2. Map()
 - Spread Operator
+
+### Notes - Movie Seat Selector
+
+You can change a `typeOf` string variable to a number variable by adding a plus sign `+` in front of the variable, this can also be achieved by using the parseInt() function. It's easier than parseInt()
+
+```JS
+const ticketPrice = +movieSelect.value;
+
+console.log(typeOf(ticketPrice))
+```
