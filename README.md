@@ -6,12 +6,13 @@ Just an example of form validation in vanilla JS refactoring before and after. S
 
 1. [Form Validator](#form-validator-module)
 2. [Movie Seat Selector](#movie-seat-selector-module)
+3. [Custom Video Player](#custom-video-player-module)
 
 ## Form Validator Module
 
 ![Form Validator Preview](completed-project-images/form-validator.png)
 
-##### New Methods Used:
+### New Methods Used:
 
 - `charAt()` used to access first letter of input field and change to uppercase.
 
@@ -211,7 +212,7 @@ form.addEventListener('submit', function(e) {
 })
 ```
 
-## [Movie Seat Selector](#movie-seat-selector) Module
+## Movie Seat Selector Module
 
 ![Movie Seat Selector](completed-project-images/movie-seat-selector.png)
 
@@ -236,3 +237,15 @@ const ticketPrice = +movieSelect.value;
 
 console.log(typeOf(ticketPrice))
 ```
+
+## Custom Video Player Module
+
+We're going to use the [JavaScript Video and Audio API](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Video_and_audio_APIs) to build a completely custom video player. Create our own buttons and link the time stamp to the UI display for the user.
+
+![Custom Video Player](completed-project-images/custom-video-player.png)
+
+### New Methods Used:
+
+Time Stamp (can be used in game timing?)
+
+### Notes - Movie Seat Selector
