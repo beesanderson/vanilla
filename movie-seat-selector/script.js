@@ -4,20 +4,31 @@ const count = document.getElementById('count');
 const total = document.getElementById('total');
 const movieSelect = document.getElementById('movie');
 
+populateUI();
+
 let ticketPrice = +movieSelect.value;
 // Seats is a node list. could use forEach() but its more efficient to add event listener onto the container
 
 
-// ----- Functions ------
+/*/ ----- Functions ----- /*/
+
+
+// Save Selected Movie Index and Price
+
+function setMovieData(movieIndex, moviePrice) {
+    localStorage.setItem('selectedMovieIndex', movieIndex);
+    localStorage.setItem('selectedMoviePrice', moviePrice);
+}
+
 
 // Update Total and Count
 function updateSelectedCount() {
     const selectedSeats = document.querySelectorAll('.row .seat.selected');
 
     // Spread Operator used with map() to create index of seats for
-    // local storage saving
     const seatsIndex = [...selectedSeats].map((seat) => [...seats].indexOf(seat));
 
+    localStorage.setItem('selectedSeats', JSON.stringify(seatsIndex));
 
     const selectedSeatsCount = selectedSeats.length;
     count.innerText = selectedSeatsCount;
@@ -26,15 +37,24 @@ function updateSelectedCount() {
 }
 
 
+// Get data from local storage and populate user interface
+function populateUI() {
+    const selectedSeats = JSON.parse(localStorage.getItem('selectedSeats'));
+    console.log(selectedSeats)
 
-// Need to create an array of indexes
-    //Copy selected seats into array
-    //Map through array
-    //return a new array of indexes
+    if (selectedSeats !== null && selectedSeats.length > 0) {
+        seats.forEach((seat, index) => {
+           if (selectedSeats.indexOf(index) > -1) {
+            seat.classList.add('selected')
+           }
+        });
+    }
 
-
-
-
+    const selectedMovieIndex = localStorage.getItem('selectedMovieIndex')
+    if (selectedMovieIndex !== null) {
+        movieSelect.selectedIndex = selectedMovieIndex
+    }
+}
 
 
 
@@ -43,6 +63,7 @@ function updateSelectedCount() {
 // Movie Select Event
 movieSelect.addEventListener('change', (e) => {
     ticketPrice = +e.target.value
+    setMovieData(e.target.selectedIndex, e.target.value)
     updateSelectedCount()
 })
 
@@ -56,3 +77,6 @@ container.addEventListener('click', (e) => {
         updateSelectedCount();
     }
 })
+
+// Initial Count and Total Set
+updateSelectedCount()
